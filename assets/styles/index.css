@@ -1,2 +1,64 @@
 @charset "utf-8";
 @import "./reset.css";
+
+.landing {
+    height: 100svh;
+    background: url("../images/aurora.jpg") center/cover no-repeat;
+    display: grid;
+    place-items: center;
+    text-align: center;
+}
+
+.hero-text h1 {
+    font-size: 50px;
+    color: #fff;
+}
+
+.hero-text p {
+    color: #ded9d9;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+dialog {
+    width: 330px;
+    padding: 20px;
+    border: none;
+    border-radius: 10px;
+    animation: fade 0.35s ease;
+}
+
+dialog::backdrop {
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(6px);
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.accept-all {
+    background: #4c6ef5;
+    color: #fff;
+}
+
+.open-settings,
+.save-preferences {
+    background: #e3e3e3;
+}
+
+.toggle {
+    display: flex;
+    justify-content: space-between;
+    margin: 12px 0;
+    font-size: 15px;
+}
