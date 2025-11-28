@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Daljit Kaur">
+        <meta name="description" content="Assignment 2 - Working with Cookies">
+        <meta name="keywords" content="html, css, javascript, cookies">
+          <title>Cookie Assignment</title>
+           <link rel="stylesheet" href="./assets/styles/index.css" media="all">
+           <script src="./assets/script/app.js" defer></script>
+
+    </head>
+    <body>
+
+    
+    <div class="landing">
+        <div class="hero-text">
+            <h1>My Cookie Assignment</h1>
+            <p>Working with Cookies (Assignment 2)</p>
+            <p>
+            Cookies are small pieces of data that are stored on a user's device when they visit a website. 
+            These data files are typically stored in the user's web browser.
+        </p>
+        </div>
+    </div>
+
+   
+    <dialog id="cookie-dialog">
+        <h2>Cookies</h2>
+        <p>
+            We use cookies to store information about your device and improve your experience.
+            Please select your preferences.
+        </p>
+
+        <div class="buttons">
+            <button class="accept-all">Accept all</button>
+            <button class="open-settings">Settings</button>
+        </div>
+    </dialog>
+
+    
+    <dialog id="settings-dialog">
+        <h2>Settings</h2>
+
+       
+        <label class="toggle">
+            Browser 
+            <input type="checkbox" id="browser-toggle" checked>
+        </label>
+
+        <label class="toggle">
+            Operating System 
+            <input type="checkbox" id="os-toggle" checked>
+        </label>
+
+        <label class="toggle">
+            Screen Width 
+            <input type="checkbox" id="width-toggle" checked>
+        </label>
+
+        <label class="toggle">
+            Screen Height 
+            <input type="checkbox" id="height-toggle" checked>
+        </label>
+
+        <button class="save-preferences">Save preferences</button>
+    </dialog>
+
+</body>
+</html>
