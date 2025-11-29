@@ -12,4 +12,6 @@ CLASS WORK :COOKIES
   
   ## Preview :
   ![Screenshot of Cookie Dialog](./assets/images/screenshot.png)
-  
+
+  ## link 
+  https://daljitkaur08.github.io/kaur_daljit_cookies_assignment01/
