@@ -1,36 +1,44 @@
 'use strict';
-function setCookie(name, value, maxAgeSeconds) {
+
+
+function makeExpires(seconds) {
+    let date = new Date();
+    date.setSeconds(date.getSeconds() + seconds);
+    return date.toUTCString();
+}
+const EXPIRES = makeExpires(16);
+
+
+function setCookie(name, value, expiresString) {
 
     const options = {
         path: '/',
-        SameSite: 'Lax'
+        SameSite: 'Lax',
+        expires: expiresString
     };
-    if (maxAgeSeconds) {
-        options['max-age'] = maxAgeSeconds;
-    }
 
     let cookieString = encodeURIComponent(name) + '=' + encodeURIComponent(value);
 
     for (let option in options) {
-        cookieString += ';' + option + '=' + options[option];
+        cookieString += '; ' + option + '=' + options[option];
     }
 
     document.cookie = cookieString;
 }
 
 function getCookie(name) {
-    const cookies = document.cookie.split(';');
+    const list = document.cookie.split(';');
 
-    for (let cookie of cookies) {
-        const [cookieName, cookieValue] =
-            cookie.split('=').map(c => c.trim());
-             if (decodeURIComponent(cookieName) === name) {
+    for (let cookie of list) {
+        const [cookieName, cookieValue] = cookie.split('=').map(c => c.trim());
+        if (decodeURIComponent(cookieName) === name) {
             return decodeURIComponent(cookieValue);
         }
     }
-
     return null;
 }
+
+
 function getBrowserName() {
     return navigator.userAgent;
 }
@@ -46,13 +54,16 @@ function getScreenWidth() {
 function getScreenHeight() {
     return screen.height;
 }
-const LIVE = 16;
+
+
+
+
 
 const cookieDialog = document.getElementById('cookie-dialog');
 const settingsDialog = document.getElementById('settings-dialog');
 
-const acceptallBtn = document.querySelector('.accept-all');
-const btnSettings = document.querySelector('.open-settings');
+const acceptBtn = document.querySelector('.accept-all');
+const settingsBtn = document.querySelector('.open-settings');
 const saveBtn = document.querySelector('.save-preferences');
 
 const browserCheck = document.getElementById('browser-toggle');
@@ -64,67 +75,74 @@ const heightCheck = document.getElementById('height-toggle');
 window.addEventListener('load', function () {
 
     const decision = getCookie('cookieDecision');
+
     if (decision === null) {
         setTimeout(() => {
             cookieDialog.showModal();
         }, 600);
     }
 });
-acceptallBtn.addEventListener('click', function () {
 
-    setCookie('browser', getBrowserName(), LIVE);
-    setCookie('os', getOSName(), LIVE);
-    setCookie('screenWidth', getScreenWidth(), LIVE);
-    setCookie('screenHeight', getScreenHeight(), LIVE);
 
-    setCookie('cookieDecision', 'all', LIVE);
+acceptBtn.addEventListener('click', function () {
+
+    setCookie('browser', getBrowserName(), EXPIRES);
+    setCookie('os', getOSName(), EXPIRES);
+    setCookie('screenWidth', getScreenWidth(), EXPIRES);
+    setCookie('screenHeight', getScreenHeight(), EXPIRES);
+
+    setCookie('cookieDecision', 'all', EXPIRES);
 
     cookieDialog.close();
 });
 
-btnSettings.addEventListener('click', function () {
+
+settingsBtn.addEventListener('click', function () {
     cookieDialog.close();
     settingsDialog.showModal();
 });
+
+
 saveBtn.addEventListener('click', function () {
 
     let anySelected = false;
 
-
-function deleteCookie(name) {
-       document.cookie = encodeURIComponent(name) +
-            "=;max-age=0;path=/";
+    
+    function deleteCookie(name) {
+        document.cookie = encodeURIComponent(name) + "=; max-age=0; path=/";
     }
 
-     deleteCookie('browser');
+    deleteCookie('browser');
     deleteCookie('os');
     deleteCookie('screenWidth');
     deleteCookie('screenHeight');
+
     
-     if (browserCheck.checked) {
-        setCookie('browser', getBrowserName(), LIVE);
+    if (browserCheck.checked) {
+        setCookie('browser', getBrowserName(), EXPIRES);
         anySelected = true;
     }
 
     if (osCheck.checked) {
-        setCookie('os', getOSName(), LIVE);
+        setCookie('os', getOSName(), EXPIRES);
         anySelected = true;
     }
 
     if (widthCheck.checked) {
-        setCookie('screenWidth', getScreenWidth(), LIVE);
+        setCookie('screenWidth', getScreenWidth(), EXPIRES);
         anySelected = true;
     }
 
     if (heightCheck.checked) {
-        setCookie('screenHeight', getScreenHeight(), LIVE);
+        setCookie('screenHeight', getScreenHeight(), EXPIRES);
         anySelected = true;
     }
 
-     if (anySelected) {
-        setCookie('cookieDecision', 'custom', LIVE);
+   
+    if (anySelected) {
+        setCookie('cookieDecision', 'custom', EXPIRES);
     } else {
-        setCookie('cookieDecision', 'rejected', LIVE);
+        setCookie('cookieDecision', 'rejected', EXPIRES);
     }
 
     settingsDialog.close();
