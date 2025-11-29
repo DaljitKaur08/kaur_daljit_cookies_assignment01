@@ -1,19 +1,18 @@
 'use strict';
-function setCookie(name, value, maxAge) {
+function setCookie(name, value, maxAgeSeconds) {
 
     const options = {
         path: '/',
         SameSite: 'Lax'
     };
-    if (maxAge) {
-       options.maxAge = maxAge;
-
+    if (maxAgeSeconds) {
+        options['max-age'] = maxAgeSeconds;
     }
+
     let cookieString = encodeURIComponent(name) + '=' + encodeURIComponent(value);
 
     for (let option in options) {
         cookieString += ';' + option + '=' + options[option];
-
     }
 
     document.cookie = cookieString;
@@ -47,7 +46,7 @@ function getScreenWidth() {
 function getScreenHeight() {
     return screen.height;
 }
-const LIVE = 19;
+const LIVE = 16;
 
 const cookieDialog = document.getElementById('cookie-dialog');
 const settingsDialog = document.getElementById('settings-dialog');
@@ -66,23 +65,19 @@ window.addEventListener('load', function () {
 
     const decision = getCookie('cookieDecision');
     if (decision === null) {
-        setTimeout(function () {
+        setTimeout(() => {
             cookieDialog.showModal();
         }, 600);
-          }
+    }
 });
 acceptallBtn.addEventListener('click', function () {
 
-    let browserValue = getBrowserName();
-    let osValue = getOSName();
-    let widthValue = getScreenWidth();
-    let heightValue = getScreenHeight();
-     setCookie('browser', browserValue, LIVE);
-    setCookie('os', osValue, LIVE);
-    setCookie('screenWidth', widthValue, LIVE);
-    setCookie('screenHeight', heightValue, LIVE);
-    
-     setCookie('cookieDecision', 'all', LIVE);
+    setCookie('browser', getBrowserName(), LIVE);
+    setCookie('os', getOSName(), LIVE);
+    setCookie('screenWidth', getScreenWidth(), LIVE);
+    setCookie('screenHeight', getScreenHeight(), LIVE);
+
+    setCookie('cookieDecision', 'all', LIVE);
 
     cookieDialog.close();
 });
@@ -94,8 +89,11 @@ btnSettings.addEventListener('click', function () {
 saveBtn.addEventListener('click', function () {
 
     let anySelected = false;
+
+
 function deleteCookie(name) {
-        document.cookie = encodeURIComponent(name) + "=;max-age=0;path=/";
+       document.cookie = encodeURIComponent(name) +
+            "=;max-age=0;path=/";
     }
 
      deleteCookie('browser');
