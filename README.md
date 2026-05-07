@@ -44,5 +44,4 @@ This project is licensed under the MIT License.
   ## Preview :
   ![Screenshot of Cookie Dialog](./assets/images/screenshot.png)
 
-  ## link 
-  https://daljitkaur08.github.io/kaur_daljit_cookies_assignment01/
+  
