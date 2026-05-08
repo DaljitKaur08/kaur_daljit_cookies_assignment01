@@ -11,7 +11,7 @@ The application displays a cookie consent dialog, allows users to accept cookies
 - JavaScript
 - Browser Cookies
 - GitHub Pages
-## How to Install / Run
+## How to  Run
 
 ###  Run Online
 
