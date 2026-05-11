@@ -18,6 +18,19 @@ The application displays a cookie consent dialog, allows users to accept cookies
 Open the live application:
 
 https://daljitkaur08.github.io/kaur_daljit_cookies_assignment01/ 
+### Run Locally
+
+#### Step 1 — Clone Repository
+
+git clone https://github.com/DaljitKaur08/kaur_daljit_cookies_assignment01.git
+
+#### Step 2 — Open Project Folder
+
+Open the downloaded folder.
+
+#### Step 3 — Run Application
+
+Open `index.html` in your browser.
 
 ## Project :
  - Shows a cookie dialog if no cookies exist (after a short delay)
